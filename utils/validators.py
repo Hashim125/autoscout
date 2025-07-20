@@ -171,9 +171,9 @@ class InputValidator:
     @staticmethod
     def validate_api_key() -> Tuple[bool, str]:
         """Validate API key is set"""
-        api_key = os.getenv("OPENROUTER_API_KEY")
+        api_key = st.secrets.get("OPENROUTER_API_KEY") or os.getenv("OPENROUTER_API_KEY")
         if not api_key:
-            return False, "OpenRouter API key not found. Please set OPENROUTER_API_KEY environment variable."
+            return False, "OpenRouter API key not found. Please set OPENROUTER_API_KEY in Streamlit secrets or as an environment variable."
         
         if len(api_key) < 10:
             return False, "API key appears to be invalid (too short)."

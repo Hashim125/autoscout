@@ -19,8 +19,8 @@ class OpenAIService:
         self.client = None
     
     def _get_api_key(self):
-        """Get API key from environment (refreshed each time)"""
-        return os.getenv("OPENROUTER_API_KEY")
+        """Get API key from Streamlit secrets or environment variable"""
+        return st.secrets.get("OPENROUTER_API_KEY") or os.getenv("OPENROUTER_API_KEY")
     
     def _ensure_client(self):
         """Ensure client is initialized with current API key"""

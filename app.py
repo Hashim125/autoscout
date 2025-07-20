@@ -102,7 +102,7 @@ if uploaded_file:
         with st.spinner("Generating report..."):
             client = OpenAI(
                 base_url="https://openrouter.ai/api/v1",
-                api_key=os.getenv("OPENROUTER_API_KEY"),
+                api_key=st.secrets.get("OPENROUTER_API_KEY") or os.getenv("OPENROUTER_API_KEY"),
             )
             
             # Stream the response
